@@ -1,0 +1,40 @@
+:root {
+  --main-color:  rgb(19, 17, 26);
+  --secondary-color: magenta;
+}
+
+body {
+  background-color: var(--main-color);
+}
+
+.diamond-container {
+  margin-top: 10%;
+}
+
+.diamond {
+  height: 150px;
+  width: 150px;
+  border: 2px solid var(--secondary-color);
+  margin: 5px auto;
+  text-align: center;
+  transform-origin: center;
+  transform: rotate(45deg);
+  opacity: 0.8;
+  /* transition: 0.4s opacity; */
+  transition: 0.8s background-color;
+  transition: width 2s, height 2s;
+  
+}
+
+.diamond:hover {
+  opacity: 1;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+  width: 170px;
+  height: 170px;
+}
+
+.diamond:active {
+  width: 300px;
+  height: 300px;
+}
