@@ -1,21 +1,16 @@
-let pokemonList = []
+//pokemons list build of name, height, type
+let pokemonList = [
+{name: 'Bulbasaur', height: 0.7, type: ['grass','posion']},
+{name: 'Weedle', height: 0.3, type: ['bug','posion']},
+{name: 'Nidoqueen', height: 1.3, type: ['ground','posion']}
+];
 
-let poke1 = {
-  name: 'Bulbasaur',
-  height: 0.7,
-  type: ['grass','posion']
-}
-
-let poke2 = {
-  name: 'Weedle',
-  height: 0.3,
-  type: ['bug','posion']
-}
-
-let poke3 = {
-  name: 'Nidoqueen',
-  height: 1.3,
-  type: ['ground','posion']
-}
-
-pokemonList.push(poke1, poke2, poke3)
+// List all pokemons, emphasis on height
+for (let i=0; i < pokemonList.length; i++) {
+  if (pokemonList[i].height > 1) {
+    document.write(
+      pokemonList[i].name + "'s height is " + pokemonList[i].height + "m" + " - big pokemon" + "<br>" )
+  }else { 
+    document.write(
+      pokemonList[i].name + "'s height is " + pokemonList[i].height + "m" + " - small pokemon" + "<br>") }
+};
