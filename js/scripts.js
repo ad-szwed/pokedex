@@ -5,13 +5,11 @@ let pokemonList = [
 {name: 'Nidoqueen', height: 1.3, type: ['ground','posion']}
 ];
 
-// List all pokemons, emphasis on height
-for (let i=0; i < pokemonList.length; i++){
-  if (pokemonList[i].height > 1) {
-    document.write(
-      "<p>" + pokemonList[i].name + "'s height is " + pokemonList[i].height + "m" + " - big pokemon" + "</p>")
-  }else { 
-    document.write(
-      "<p>" + pokemonList[i].name + "'s height is " + pokemonList[i].height + "m" + " - small pokemon" + "</p>")
-    }
-} document.write("<br>========= END OF LIST =========")
+//forEach iteration to show if pokemon is big or small
+pokemonList.forEach(function(pokemon){
+  if(pokemon.height > 1){
+    document.write('<p>' + pokemon.name + '\'s height is ' + pokemon.height + 'm - '  + "that's a big boy!</p>")
+  }else {
+    document.write('<p>' + pokemon.name + '\'s height is ' + pokemon.height + 'm - '  + "that's a small boy!</p>")
+  } 
+});
