@@ -39,7 +39,7 @@ let pokemonRepository = (function () {
     
     // button click listener
     button.addEventListener('click', function(event){
-      showDetails(pokemon.name)
+      showDetails(pokemon)
     })
   }
 
