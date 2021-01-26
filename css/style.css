@@ -1,14 +1,16 @@
 :root {
   --main-color: rgb(19, 17, 26);
-  --secondary-color: rgb(255, 255, 255);
+  --secondary-color: #372249;
   --button-color: #53366b;
   --button-color2: #442b58;
   --button-shadow: #45345370;
+  --txt-white: whitesmoke;
 }
 
 body {
   background-color: var(--main-color);
-  color: var(--secondary-color);
+  color: var(--txt-white);
+  text-transform: capitalize;
 }
 
 .pokedex {
@@ -23,7 +25,8 @@ body {
   text-align: left;
 }
 
-.button {
+.button,
+.button2 {
   padding: 10px 10px;
   font-family: inherit;
   background-color: var(--button-color);
@@ -32,6 +35,7 @@ body {
   margin: 5px 0;
   width: 100%;
   box-shadow: 0 7px var(--button-shadow);
+  text-transform: capitalize;
 }
 
 .button:hover {
@@ -46,16 +50,58 @@ body {
   border: none;
 }
 
+.button2 {
+  margin-left: 75%;
+  width: 20%;
+}
+
 .loading {
   position: fixed;
   height: 300px;
   width: 300px;
-  top: 50%;
-  left: 50%;
-  margin-top: -150px;
-  margin-left: -150px;
+  margin: 20vh auto;
 }
 
-ul {
-  padding-inline-start: 0%;
+/* MODAL */
+
+#modal-container {
+  position: fixed;
+  padding: 20px;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  
+  /* to show it above other content */
+  z-index: 999; 
+  
+  /* to allow scrolling if the screen is not high enough */
+  overflow: auto; 
+  
+  /* this is used to center the modal */
+  display: none;
+  text-align: center;
+}
+
+#modal-container.is-visible {
+  display: grid;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vh;
+  height: 40vh;
+  background: black;
+  border: 3px solid var(--button-color);
+}
+
+.modal img {
+  margin: 0;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
 }
