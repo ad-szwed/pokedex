@@ -46,12 +46,14 @@ body {
   text-transform: capitalize;
 }
 
-.button:hover {
+.button:hover,
+.button2:hover {
   background-color: var(--button-color2);
   cursor: pointer;
 }
 
-.button:active {
+.button:active,
+.button2:active {
   background-color: var(--button-color2);
   box-shadow: 0 3px var(--button-shadow);
   transform: translateY(4px);
