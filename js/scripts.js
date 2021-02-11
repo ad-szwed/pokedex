@@ -51,13 +51,14 @@ function loadList() {
     button.innerText = pokemon.name;
     button.classList.add('btn');
     button.classList.add('btn-info');
+    button.classList.add('text-capitalize');
     button.setAttribute('id','pokemon-info');
     button.setAttribute('data-toggle','modal');
-    button.setAttribute('data-target','#pokemon-info');    
+    button.setAttribute('data-target','#pokemon-info');
+    button.setAttribute('data-bs-name', pokemon.name);   
     listPokemon.classList.add('group-list-item');
     listPokemon.appendChild(button);
     pokemonList.appendChild(listPokemon);
-    
     // button click listener showing object in console
     button.addEventListener('click', function(){
       showDetails(pokemon)
@@ -110,7 +111,7 @@ function loadList() {
     modalBody.empty();
 
     // name element inside modal
-    let nameElement = $('<h1>' + pokemon.name + '</h1>');
+    let nameElement = $('<h1>' + pokemon.name + '</h1>').addClass('text-capitalize');
     // img in modal
     let imageElementFront = $('<img class="modal-img" style="width:50%">');
     imageElementFront.attr("src", pokemon.imageUrlFront);
@@ -120,8 +121,6 @@ function loadList() {
     let heightElement = $('<p>' + "Height: " + pokemon.height + '</p>');
     // weight 
     let weightElement = $('<p>' + "Weight: " + pokemon.weight + '</p>');
-    // pokemon types
-    let typesElement = $('<p>' + "Type: " + pokemon.types + '</p>');
     // pokemon abilities
     let abilitiesElement = $('<p>' + "Abilities: " + pokemon.abilities + '</p>');
 
@@ -130,9 +129,35 @@ function loadList() {
     modalBody.append(imageElementBack);
     modalBody.append(heightElement);
     modalBody.append(weightElement);
-    modalBody.append(typesElement);
     modalBody.append(abilitiesElement);
 
+    // pokemon types stickers
+    pokemon.types.forEach(function(pokemon) {
+      let pokemonType = document.createElement('img');
+      pokemonType.classList.add('type');
+
+      switch(pokemon.type.name) {
+        case "normal": pokemonType.setAttribute('src', 'img/normal.png'); break;
+        case "water": pokemonType.setAttribute('src', 'img/water.png'); break;
+        case "electric": pokemonType.setAttribute('src', 'img/electric.png'); break;
+        case "fighting": pokemonType.setAttribute('src', 'img/fight.png'); break;
+        case "ground": pokemonType.setAttribute('src', 'img/ground.png'); break;
+        case "psychic": pokemonType.setAttribute('src', 'img/psychic.png'); break;
+        case "rock": pokemonType.setAttribute('src', 'img/rock.png'); break;
+        case "dark": pokemonType.setAttribute('src', 'img/dark.png'); break;
+        case "steel": pokemonType.setAttribute('src', 'img/steel.png'); break;
+        case "fire": pokemonType.setAttribute('src', 'img/fire.png'); break;
+        case "grass": pokemonType.setAttribute('src', 'img/grass.png'); break;
+        case "ice": pokemonType.setAttribute('src', 'img/ice.png'); break;
+        case "poison": pokemonType.setAttribute('src', 'img/poison.png'); break;
+        case "flying": pokemonType.setAttribute('src', 'img/flying.png'); break;
+        case "bug": pokemonType.setAttribute('src', 'img/bug.png'); break;
+        case "ghost": pokemonType.setAttribute('src', 'img/ghost.png'); break;
+        case "dragon": pokemonType.setAttribute('src', 'img/dragon.png'); break;
+        case "fairy": pokemonType.setAttribute('src', 'img/fairy.png'); break;
+      }
+      modalBody.append(pokemonType);
+    })
   }
 
   return {
