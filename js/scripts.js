@@ -62,6 +62,7 @@ function loadList() {
     // button click listener showing object in console
     button.addEventListener('click', function(){
       showDetails(pokemon)
+      hideLoading();
     })
   }
 
@@ -74,13 +75,15 @@ function loadList() {
         return response.json();
     }).then(function (details) {
         // Now we add the details to the item
-        item.id = details.id;
-        item.imageUrl = details.sprites.other.dream_world.front_default;
+        item.imageUrlFront = details.sprites.other.dream_world.front_default;
         item.height = details.height;
         item.weight = details.weight;
         item.types = details.types;
-        hideLoading();
-    }).catch(function (e) {
+        item.abilities = [];
+        details.abilities.forEach(function (itemAbilities) {
+          item.abilities.push(itemAbilities.ability.name);
+        });
+        }).catch(function (e) {
         console.error(e);
         hideLoading();
     });
@@ -88,16 +91,17 @@ function loadList() {
 
 // loading screen
   function loading() {
-    let loadingImg = document.createElement('img');
-    loadingImg.src = 'img/pikachu.png';
-    loadingImg.classList.add('loading');
-    document.querySelector('.pokedex').appendChild(loadingImg);
+    let loadingImg = $('<img />', {
+      class: 'loading',
+      src: 'img/pikachu.png',
+      alt: 'loading image'
+    });
+    loadingImg.appendTo('.pokedex').addClass('mx-auto d-block')
   } 
 
 // remove loading screen
   function hideLoading() {
-    let loadingImg = document.querySelector('.loading');
-    loadingImg.parentElement.removeChild(loadingImg);
+    $('.loading').remove();
   }
 
 // MODAL
@@ -113,20 +117,18 @@ function loadList() {
     // name element inside modal
     let nameElement = $('<h1>' + pokemon.name + '</h1>').addClass('text-capitalize');
     // img in modal
-    let imageElementFront = $('<img class="modal-img" style="width:50%">');
-    imageElementFront.attr("src", pokemon.imageUrlFront);
-    let imageElementBack = $('<img class="modal-img" style="width:50%">');
-    imageElementBack.attr("src", pokemon.imageUrlBack);
+    let imageElement = $('<img class="modal-img" style="width:50%">');
+    imageElement.attr("src", pokemon.imageUrlFront).addClass('mx-auto d-block');
     // height 
     let heightElement = $('<p>' + "Height: " + pokemon.height + '</p>');
     // weight 
     let weightElement = $('<p>' + "Weight: " + pokemon.weight + '</p>');
     // pokemon abilities
-    let abilitiesElement = $('<p>' + "Abilities: " + pokemon.abilities + '</p>');
+    let abilitiesElement = $('<p>' + "Abilities: " + pokemon.abilities.join(', ') + '</p>').addClass('text-capitalize');
+    
 
     modalTitle.append(nameElement);
-    modalBody.append(imageElementFront);
-    modalBody.append(imageElementBack);
+    modalBody.append(imageElement);
     modalBody.append(heightElement);
     modalBody.append(weightElement);
     modalBody.append(abilitiesElement);
@@ -137,24 +139,58 @@ function loadList() {
       pokemonType.classList.add('type');
 
       switch(pokemon.type.name) {
-        case "normal": pokemonType.setAttribute('src', 'img/normal.png'); break;
-        case "water": pokemonType.setAttribute('src', 'img/water.png'); break;
-        case "electric": pokemonType.setAttribute('src', 'img/electric.png'); break;
-        case "fighting": pokemonType.setAttribute('src', 'img/fight.png'); break;
-        case "ground": pokemonType.setAttribute('src', 'img/ground.png'); break;
-        case "psychic": pokemonType.setAttribute('src', 'img/psychic.png'); break;
-        case "rock": pokemonType.setAttribute('src', 'img/rock.png'); break;
-        case "dark": pokemonType.setAttribute('src', 'img/dark.png'); break;
-        case "steel": pokemonType.setAttribute('src', 'img/steel.png'); break;
-        case "fire": pokemonType.setAttribute('src', 'img/fire.png'); break;
-        case "grass": pokemonType.setAttribute('src', 'img/grass.png'); break;
-        case "ice": pokemonType.setAttribute('src', 'img/ice.png'); break;
-        case "poison": pokemonType.setAttribute('src', 'img/poison.png'); break;
-        case "flying": pokemonType.setAttribute('src', 'img/flying.png'); break;
-        case "bug": pokemonType.setAttribute('src', 'img/bug.png'); break;
-        case "ghost": pokemonType.setAttribute('src', 'img/ghost.png'); break;
-        case "dragon": pokemonType.setAttribute('src', 'img/dragon.png'); break;
-        case "fairy": pokemonType.setAttribute('src', 'img/fairy.png'); break;
+        case "normal": pokemonType.setAttribute('src', 'img/normal.png'); 
+        modalHeader.css("background-color", "#9c9c63"); 
+        break;
+        case "water": pokemonType.setAttribute('src', 'img/water.png');
+        modalHeader.css("background-color", "#6890f0");
+        break;
+        case "electric": pokemonType.setAttribute('src', 'img/electric.png');
+        modalHeader.css("background-color", "#FFFF00");
+        break;
+        case "fighting": pokemonType.setAttribute('src', 'img/fight.png');
+        modalHeader.css("background-color", "#848484");
+        break;
+        case "ground": pokemonType.setAttribute('src', 'img/ground.png');
+        modalHeader.css("background-color", "#996736");
+        break;
+        case "psychic": pokemonType.setAttribute('src', 'img/psychic.png');
+        modalHeader.css("background-color", "#f0c91f");
+        break;
+        case "rock": pokemonType.setAttribute('src', 'img/rock.png');
+        modalHeader.css("background-color", "#dbb54d");
+        break;
+        case "dark": pokemonType.setAttribute('src', 'img/dark.png');
+        modalHeader.css("background-color", "#444a5c");
+        break;
+        case "steel": pokemonType.setAttribute('src', 'img/steel.png');
+        modalHeader.css("background-color", "#8c8f96");
+        break;
+        case "fire": pokemonType.setAttribute('src', 'img/fire.png');
+        modalHeader.css("background-color", "#f08030");
+        break;
+        case "grass": pokemonType.setAttribute('src', 'img/grass.png');
+        modalHeader.css("background-color", "#78c850");
+        break;
+        case "ice": pokemonType.setAttribute('src', 'img/ice.png');
+        modalHeader.css("background-color", "#42aeae");
+        break;
+        case "poison": pokemonType.setAttribute('src', 'img/poison.png');
+        modalHeader.css("background-color", "#a890f0");
+        break;
+        case "flying": pokemonType.setAttribute('src', 'img/flying.png');
+        break;
+        case "bug": pokemonType.setAttribute('src', 'img/bug.png');
+        modalHeader.css("background-color", "a8b820");
+        break;
+        case "ghost": pokemonType.setAttribute('src', 'img/ghost.png');
+        modalHeader.css("background-color", "#644e88");
+        break;
+        case "dragon": pokemonType.setAttribute('src', 'img/dragon.png');
+        break;
+        case "fairy": pokemonType.setAttribute('src', 'img/fairy.png');
+        modalHeader.css("background-color", "#e87890");
+        break;
       }
       modalBody.append(pokemonType);
     })
