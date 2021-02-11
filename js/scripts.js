@@ -48,14 +48,15 @@ function loadList() {
     let pokemonList = document.querySelector('.list-group');
     let listPokemon = document.createElement('li');
     let button = document.createElement('button');
+    // buttons setting
     button.innerText = pokemon.name;
     button.classList.add('btn');
     button.classList.add('btn-info');
     button.classList.add('text-capitalize');
+    button.classList.add('btn-block')
     button.setAttribute('id','pokemon-info');
     button.setAttribute('data-toggle','modal');
     button.setAttribute('data-target','#pokemon-info');
-    button.setAttribute('data-bs-name', pokemon.name);   
     listPokemon.classList.add('group-list-item');
     listPokemon.appendChild(button);
     pokemonList.appendChild(listPokemon);
@@ -120,11 +121,11 @@ function loadList() {
     let imageElement = $('<img class="modal-img" style="width:50%">');
     imageElement.attr("src", pokemon.imageUrlFront).addClass('mx-auto d-block');
     // height 
-    let heightElement = $('<p>' + "Height: " + pokemon.height + '</p>');
+    let heightElement = $('<p>' + 'Height: ' + pokemon.height*10 + ' cm</p>');
     // weight 
-    let weightElement = $('<p>' + "Weight: " + pokemon.weight + '</p>');
+    let weightElement = $('<p>' + 'Weight: ' + pokemon.weight/10 + ' kg</p>');
     // pokemon abilities
-    let abilitiesElement = $('<p>' + "Abilities: " + pokemon.abilities.join(', ') + '</p>').addClass('text-capitalize');
+    let abilitiesElement = $('<p>' + 'Abilities: ' + pokemon.abilities.join(', ') + '</p>').addClass('text-capitalize');
     
 
     modalTitle.append(nameElement);
@@ -133,7 +134,7 @@ function loadList() {
     modalBody.append(weightElement);
     modalBody.append(abilitiesElement);
 
-    // pokemon types stickers
+    // pokemon types stickers and header colour depending on type
     pokemon.types.forEach(function(pokemon) {
       let pokemonType = document.createElement('img');
       pokemonType.classList.add('type');
