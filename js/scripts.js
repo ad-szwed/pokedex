@@ -69,14 +69,12 @@ function loadDetails(item) {
   });
 }
 
-// creating pokemon cards
+// cards creation and click handler
   function addListItem(pokemon){
-    loading();
     pokemonRepository.loadDetails(pokemon).then(function() {
       // rows instead of grid - better for bigger screens
       let row = $('.row')
       .addClass("d-flex justify-content-center");
-      // btn class for card to get pointer when hover over
       let card = $('<div data-toggle="modal" data-target="#pokemon-info" style="width: 18rem;"></div>')
       .addClass("card mt-3 mr-3 btn");
       let image = $('<img style="width: 35%; "alt="animated pokemon">')
@@ -87,16 +85,14 @@ function loadDetails(item) {
       .addClass('card-title text-capitalize mx-auto d-block btn btn-info mb-1');    
       let body = $('<div></div>')
       .addClass('card-body');;
-      // let button = $('<button type="button" data-toggle="modal" data-target="#pokemon-info">Details</button>')
-      // .addClass("btn bg-info text-white mx-auto mb-1");
 
       // Append
+      loading();
       row.append(card);
       body.append(image);
       card.append(body);
       card.append(title);
-      // card.append(button);
-
+      hideLoading();
       // modal showing on clicking the card
       card.click(function(){
         showDetails(pokemon)
@@ -211,8 +207,6 @@ function loadDetails(item) {
       modalBody.append(pokemonType);
     })
   }
-
-  
 
   return {
     getAll: getAll,
