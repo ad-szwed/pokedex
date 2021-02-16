@@ -57,7 +57,7 @@ function loadList() {
     button.setAttribute('id','pokemon-info');
     button.setAttribute('data-toggle','modal');
     button.setAttribute('data-target','#pokemon-info');
-    listPokemon.classList.add('group-list-item');
+    button.classList.add('group-list-item');
     listPokemon.appendChild(button);
     pokemonList.appendChild(listPokemon);
     // button click listener showing object in console
@@ -197,13 +197,14 @@ function loadList() {
     })
   }
 
+  
+
   return {
     add: add,
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails
-
   }
 })();
 
@@ -213,3 +214,23 @@ pokemonRepository.loadList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+// search engine
+function search(){
+  // input from searchbar
+  let input = document.querySelector('#searchbar').value.toLowerCase();
+  // database to check
+  let li = document.querySelectorAll('button');
+
+  // going over all items in database
+    for (i = 0; i < li.length; i++) {
+      // using the button's text for reference
+      let pokemon = li[i].innerText.toLowerCase();
+      // console.log(pokemon)
+      if (pokemon.indexOf(input) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  };
