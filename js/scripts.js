@@ -140,56 +140,56 @@ function loadList() {
       pokemonType.classList.add('type');
 
       switch(pokemon.type.name) {
-        case "normal": pokemonType.setAttribute('src', 'img/normal.png'); 
+        case "normal": pokemonType.setAttribute('src', '/img/normal.png'); 
         modalHeader.css("background-color", "#9c9c63"); 
         break;
-        case "water": pokemonType.setAttribute('src', 'img/water.png');
+        case "water": pokemonType.setAttribute('src', '/img/water.png');
         modalHeader.css("background-color", "#6890f0");
         break;
-        case "electric": pokemonType.setAttribute('src', 'img/electric.png');
+        case "electric": pokemonType.setAttribute('src', '/img/electric.png');
         modalHeader.css("background-color", "#FFFF00");
         break;
-        case "fighting": pokemonType.setAttribute('src', 'img/fight.png');
+        case "fighting": pokemonType.setAttribute('src', '/img/fight.png');
         modalHeader.css("background-color", "#848484");
         break;
-        case "ground": pokemonType.setAttribute('src', 'img/ground.png');
+        case "ground": pokemonType.setAttribute('src', '/img/ground.png');
         modalHeader.css("background-color", "#996736");
         break;
-        case "psychic": pokemonType.setAttribute('src', 'img/psychic.png');
+        case "psychic": pokemonType.setAttribute('src', '/img/psychic.png');
         modalHeader.css("background-color", "#f0c91f");
         break;
-        case "rock": pokemonType.setAttribute('src', 'img/rock.png');
+        case "rock": pokemonType.setAttribute('src', '/img/rock.png');
         modalHeader.css("background-color", "#dbb54d");
         break;
-        case "dark": pokemonType.setAttribute('src', 'img/dark.png');
+        case "dark": pokemonType.setAttribute('src', '/img/dark.png');
         modalHeader.css("background-color", "#444a5c");
         break;
-        case "steel": pokemonType.setAttribute('src', 'img/steel.png');
+        case "steel": pokemonType.setAttribute('src', '/img/steel.png');
         modalHeader.css("background-color", "#8c8f96");
         break;
-        case "fire": pokemonType.setAttribute('src', 'img/fire.png');
+        case "fire": pokemonType.setAttribute('src', '/img/fire.png');
         modalHeader.css("background-color", "#f08030");
         break;
-        case "grass": pokemonType.setAttribute('src', 'img/grass.png');
+        case "grass": pokemonType.setAttribute('src', '/img/grass.png');
         modalHeader.css("background-color", "#78c850");
         break;
-        case "ice": pokemonType.setAttribute('src', 'img/ice.png');
+        case "ice": pokemonType.setAttribute('src', '/img/ice.png');
         modalHeader.css("background-color", "#42aeae");
         break;
-        case "poison": pokemonType.setAttribute('src', 'img/poison.png');
+        case "poison": pokemonType.setAttribute('src', '/img/poison.png');
         modalHeader.css("background-color", "#a890f0");
         break;
-        case "flying": pokemonType.setAttribute('src', 'img/flying.png');
+        case "flying": pokemonType.setAttribute('src', '/img/flying.png');
         break;
-        case "bug": pokemonType.setAttribute('src', 'img/bug.png');
+        case "bug": pokemonType.setAttribute('src', '/img/bug.png');
         modalHeader.css("background-color", "a8b820");
         break;
-        case "ghost": pokemonType.setAttribute('src', 'img/ghost.png');
+        case "ghost": pokemonType.setAttribute('src', '/img/ghost.png');
         modalHeader.css("background-color", "#644e88");
         break;
-        case "dragon": pokemonType.setAttribute('src', 'img/dragon.png');
+        case "dragon": pokemonType.setAttribute('src', '/img/dragon.png');
         break;
-        case "fairy": pokemonType.setAttribute('src', 'img/fairy.png');
+        case "fairy": pokemonType.setAttribute('src', '/img/fairy.png');
         modalHeader.css("background-color", "#e87890");
         break;
       }
@@ -230,7 +230,7 @@ function search(){
       if (pokemon.indexOf(input) > -1) {
         li[i].style.display = "";
       } else {
-        li[i].style.display = "none";
+        li[i].display = "none";
       }
     }
   };
