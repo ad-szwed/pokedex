@@ -68,7 +68,7 @@ function loadList() {
   }
 
 
-// listing details of a selected pokemon
+// loading details of pokemons
   function loadDetails(item) {
     loading();
     let url = item.detailsUrl;
@@ -77,6 +77,10 @@ function loadList() {
     }).then(function (details) {
         // Now we add the details to the item
         item.imageUrlFront = details.sprites.other.dream_world.front_default;
+        item.imageUrlAnimated =
+          details.sprites.versions["generation-v"][
+            "black-white"
+          ].animated.front_default;
         item.height = details.height;
         item.weight = details.weight;
         item.types = details.types;
@@ -220,7 +224,7 @@ function search(){
   // input from searchbar
   let input = document.querySelector('#searchbar').value.toLowerCase();
   // database to check
-  let li = document.querySelectorAll('button');
+  let li = document.querySelectorAll('li');
 
   // going over all items in database
     for (i = 0; i < li.length; i++) {
@@ -230,7 +234,7 @@ function search(){
       if (pokemon.indexOf(input) > -1) {
         li[i].style.display = "";
       } else {
-        li[i].display = "none";
+        li[i].style.display = "none";
       }
     }
   };
