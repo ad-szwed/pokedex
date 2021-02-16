@@ -4,3 +4,10 @@
   font-weight: 200;
   font-size: 19px;
 }
+
+.szwed-shop:hover,
+.szwed-shop:focus,
+.szwed-shop:active {
+  text-decoration: none;
+  color: rgb(195, 42, 34);
+}

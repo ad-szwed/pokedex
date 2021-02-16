@@ -14,9 +14,16 @@
     <!-- NAVIGATION BAR -->
     <nav class="navbar navbar-dark bg-dark justify-content-between">
       <h3 class="navbar-brand text-white">POKEDEX</h3>
-      <h5 class="navbar-brand text-white">POWERED BY <a class="szwed-shop" href="https://ad-szwed.github.io">&lt;Coding szwed-shop&gt;</coding></a></h5>
+      <h5 class="navbar-brand text-white">POWERED BY <a class="szwed-shop" href="https://ad-szwed.github.io" target="blank">&lt;Coding szwed-shop&gt;</a></h5>
       <form class="form-inline">
-        <input id= "searchbar" oninput="search()" class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search">
+        <input id= "searchbar" 
+        oninput="search()" 
+        class="form-control mr-sm-2" 
+        type="search" 
+        placeholder="Search..."
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Search...'"
+        aria-label="Search">
       </form>
     </nav>
     <!-- MODAL -->
