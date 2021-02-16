@@ -228,7 +228,8 @@ function search(){
   // input from searchbar
   let input = document.querySelector('#searchbar').value.toLowerCase();
   // database to check
-  let li = document.querySelectorAll('li');
+  let li = document.querySelectorAll('.card');
+  // console.log(li.textContent)
 
   // going over all items in database
     for (i = 0; i < li.length; i++) {
