@@ -16,7 +16,7 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
   
-  // display pokemon details
+  // display pokemon details (modal)
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
       showModal(pokemon);
@@ -43,56 +43,67 @@ function loadList() {
   })
 }
 
-// creating pokemon list
-  function addListItem(pokemon){
-    let pokemonList = document.querySelector('.list-group');
-    let listPokemon = document.createElement('li');
-    let button = document.createElement('button');
-    // buttons setting
-    button.innerText = pokemon.name;
-    button.classList.add('btn');
-    button.classList.add('btn-info');
-    button.classList.add('text-capitalize');
-    button.classList.add('btn-block')
-    button.setAttribute('id','pokemon-info');
-    button.setAttribute('data-toggle','modal');
-    button.setAttribute('data-target','#pokemon-info');
-    button.classList.add('group-list-item');
-    listPokemon.appendChild(button);
-    pokemonList.appendChild(listPokemon);
-    // button click listener showing object in console
-    button.addEventListener('click', function(){
-      showDetails(pokemon)
+// loaded details of pokemons
+function loadDetails(item) {
+  loading();
+  let url = item.detailsUrl;
+  return fetch(url).then(function (response) {
+      return response.json();
+  }).then(function (details) {
+      // Details to be loaded from the API
+      item.imageUrlFront = details.sprites.other.dream_world.front_default;
+      item.imageUrlAnimated =
+        details.sprites.versions["generation-v"][
+          "black-white"
+        ].animated.front_default;
+      item.height = details.height;
+      item.weight = details.weight;
+      item.types = details.types;
+      item.abilities = [];
+      details.abilities.forEach(function (itemAbilities) {
+        item.abilities.push(itemAbilities.ability.name);
+      });
+      }).catch(function (e) {
+      console.error(e);
       hideLoading();
-    })
-  }
+  });
+}
 
-
-// loading details of pokemons
-  function loadDetails(item) {
+// creating pokemon cards
+  function addListItem(pokemon){
     loading();
-    let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-        return response.json();
-    }).then(function (details) {
-        // Now we add the details to the item
-        item.imageUrlFront = details.sprites.other.dream_world.front_default;
-        item.imageUrlAnimated =
-          details.sprites.versions["generation-v"][
-            "black-white"
-          ].animated.front_default;
-        item.height = details.height;
-        item.weight = details.weight;
-        item.types = details.types;
-        item.abilities = [];
-        details.abilities.forEach(function (itemAbilities) {
-          item.abilities.push(itemAbilities.ability.name);
-        });
-        }).catch(function (e) {
-        console.error(e);
+    pokemonRepository.loadDetails(pokemon).then(function() {
+      // rows instead of grid - better for bigger screens
+      let row = $('.row')
+      .addClass("d-flex justify-content-center");
+      // btn class for card to get pointer when hover over
+      let card = $('<div data-toggle="modal" data-target="#pokemon-info" style="width: 18rem;"></div>')
+      .addClass("card mt-3 mr-3 btn");
+      let image = $('<img style="width: 35%; "alt="animated pokemon">')
+      .attr("src", pokemon.imageUrlAnimated)
+      .addClass("card-img-top mx-auto d-block");
+      // title looks like button 
+      let title = $('<h5>' + pokemon.name + "</h5>")
+      .addClass('card-title text-capitalize mx-auto d-block btn btn-info mb-1');    
+      let body = $('<div></div>')
+      .addClass('card-body');;
+      // let button = $('<button type="button" data-toggle="modal" data-target="#pokemon-info">Details</button>')
+      // .addClass("btn bg-info text-white mx-auto mb-1");
+
+      // Append
+      row.append(card);
+      body.append(image);
+      card.append(body);
+      card.append(title);
+      // card.append(button);
+
+      // modal showing on clicking the card
+      card.click(function(){
+        showDetails(pokemon)
         hideLoading();
+      });
     });
-  }
+  };
 
 // loading screen
   function loading() {
@@ -138,7 +149,7 @@ function loadList() {
     modalBody.append(weightElement);
     modalBody.append(abilitiesElement);
 
-    // pokemon types stickers and header colour depending on type
+    // attack types stickers and header colour
     pokemon.types.forEach(function(pokemon) {
       let pokemonType = document.createElement('img');
       pokemonType.classList.add('type');
@@ -204,7 +215,6 @@ function loadList() {
   
 
   return {
-    add: add,
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
