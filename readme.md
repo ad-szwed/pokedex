@@ -5,7 +5,7 @@ This app was created to pass the JavaScript portion of CareerFoundry web dev boo
 First created with vanilla JS, then changed to mostly jquery and bootstrap.
 
 In the begining it was supposed to be a bunch of buttons, each with a modal 
-opened upoin clicking it, giving you pokemon pic and it's height.
+opened upon clicking it, giving you pokemon pic and it's height.
 
 When I saw how it looks like i thought to myself:
 
