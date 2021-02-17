@@ -108,13 +108,13 @@ function loadDetails(item) {
       src: 'img/pikachu.png',
       alt: 'loading image'
     });
-    loadingImg.appendTo('.pokedex').addClass('mx-auto d-block')
-  } 
+    loadingImg.appendTo('.pokedex');
+  };
 
 // remove loading screen
   function hideLoading() {
     $('.loading').remove();
-  }
+  };
 
 // MODAL
   function showModal(pokemon){
@@ -206,14 +206,14 @@ function loadDetails(item) {
       }
       modalBody.append(pokemonType);
     })
-  }
+  };
 
   return {
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails
-  }
+  };
 })();
 
 // display pokemons
