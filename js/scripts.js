@@ -21,7 +21,7 @@ let pokemonRepository = (function () {
 
   // fetching pokemon list from the API
   function loadList() {
-    loading();
+    //loading();
     return fetch(apiUrl)
       .then(function (response) {
         return response.json();
@@ -34,7 +34,7 @@ let pokemonRepository = (function () {
           };
           add(pokemon);
         });
-        hideLoading();
+        //hideLoading();
       })
       .catch(function (e) {
         console.error(e);
@@ -79,7 +79,7 @@ let pokemonRepository = (function () {
       let card = $(
         '<div data-toggle="modal" data-target="#pokemon-info" style="width: 18rem;"></div>'
       ).addClass('card mt-3 mr-3 btn');
-      let image = $('<img style="width: 35%;" "alt="animated pokemon">')
+      let image = $('<img class="pokemon-img" style="width: 35%;" "alt="animated pokemon">')
         .attr('src', pokemon.imageUrlAnimated)
         .addClass('card-img-top mx-auto d-block');
       // title looks like button
@@ -94,7 +94,7 @@ let pokemonRepository = (function () {
       body.append(image);
       card.append(body);
       card.append(title);
-      hideLoading();
+      //hideLoading();
       // modal showing on clicking the card
       card.click(function () {
         showDetails(pokemon);
@@ -116,6 +116,7 @@ let pokemonRepository = (function () {
   // remove loading screen
   function hideLoading() {
     $('.loading').remove();
+    $(".overlay").remove();
   }
 
   // MODAL
@@ -236,11 +237,35 @@ let pokemonRepository = (function () {
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
+    hideLoading: hideLoading
   };
 })();
 
 // display pokemons
 pokemonRepository.loadList().then(function () {
+  let imagesLoaded = 0;
+  let allImages = pokemonRepository.getAll().length;
+  console.log(allImages, '!!LENGTH')
+  // https://stackoverflow.com/questions/14983988/is-bubbling-available-for-image-load-events
+  // https://stackoverflow.com/questions/203198/event-binding-on-dynamically-created-elements
+  document.body.addEventListener(
+    "load",
+    function (event) {
+      let tgt = event.target;
+      console.log(tgt, '!!target')
+      if (tgt.tagName === "IMG" && tgt.classList.contains("pokemon-img")) {
+        imagesLoaded++;
+        console.log(imagesLoaded, "!!images");
+        if (imagesLoaded === allImages) {
+          pokemonRepository.hideLoading();
+          // alert("hide me");
+        }
+      }
+    },
+    true // <-- useCapture
+  );
+
+
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
