@@ -1,4 +1,4 @@
-# Pokedex
+# Pokedex - my first ever project in JS
 
 Live site available [here](https://ad-szwed.github.io/pokedex/)
 
